@@ -9,10 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('prodotti', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('nome');
             $table->text('descrizione')->nullable();
             $table->decimal('prezzo', 8, 2);
@@ -21,12 +22,11 @@ return new class extends Migration
         });
     }
 
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('prodottos');
+        Schema::dropIfExists('prodotti');
     }
 };
